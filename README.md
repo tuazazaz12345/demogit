@@ -13,7 +13,7 @@ Tạo một cơ sở dữ liệu có tên là website (6)
 Nhập tệp tin database/website (6)
 
 
-Cấu hình:
+Cấu hình: 
 
 
 Cơ sở dữ liệu & URL: Chỉnh sửa trong app/config/config.php. Lưu ý cập nhật BASE_URLliên kết ngrok của bạn.
