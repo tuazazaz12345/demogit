@@ -1,0 +1,111 @@
+/* Custom styles for homepage */
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #0066ff;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #333333;
+    font-weight: 500;
+    padding: 8px 16px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #0066ff;
+}
+
+.search-box {
+    background: #f8f9fa;
+    border-radius: 25px;
+    padding: 8px 20px;
+    border: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.search-box:focus-within {
+    box-shadow: 0 0 0 2px rgba(0,102,255,0.1);
+    border-color: #0066ff;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 300px;
+    padding: 5px;
+}
+
+.search-box button {
+    background: #007bff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    color: white;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.book-card h5 {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333333;
+}
+
+.book-card .price {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.book-card .category {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.btn-view {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 15px;
+    width: 100%;
+    margin-top: 10px;
+}

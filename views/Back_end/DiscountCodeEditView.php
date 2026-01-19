@@ -1,0 +1,90 @@
+<?php
+$discount = $data['discount'] ?? [];
+?>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h2><i class="bi bi-pencil-square"></i> Chỉnh Sửa Mã Giảm Giá</h2>
+        </div>
+    </div>
+
+    <form method="POST" action="<?php echo APP_URL; ?>/DiscountCodeController/update/<?php echo $discount['id']; ?>" class="row g-3">
+        <div class="col-md-6">
+            <label for="code" class="form-label">Mã Giảm Giá <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="code" name="code" required 
+                   value="<?php echo htmlspecialchars($discount['code'] ?? ''); ?>" style="text-transform: uppercase;">
+        </div>
+
+        <div class="col-md-6">
+            <label for="discount_type" class="form-label">Loại Giảm Giá <span class="text-danger">*</span></label>
+            <select class="form-select" id="discount_type" name="discount_type" required>
+                <option value="percentage" <?php echo ($discount['discount_type'] ?? '') === 'percentage' ? 'selected' : ''; ?>>Phần Trăm (%)</option>
+                <option value="fixed" <?php echo ($discount['discount_type'] ?? '') === 'fixed' ? 'selected' : ''; ?>>Cố Định (₫)</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="discount_value" class="form-label">Giá Trị Giảm <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="discount_value" name="discount_value" 
+                   required min="0" step="0.01"
+                   value="<?php echo $discount['discount_value'] ?? 0; ?>">
+        </div>
+
+        <div class="col-md-6">
+            <label for="max_discount" class="form-label">Giảm Tối Đa (₫)</label>
+            <input type="number" class="form-control" id="max_discount" name="max_discount" 
+                   min="0" step="0.01"
+                   value="<?php echo $discount['max_discount'] ?? ''; ?>">
+        </div>
+
+        <div class="col-md-6">
+            <label for="min_order_value" class="form-label">Đơn Hàng Tối Thiểu (₫)</label>
+            <input type="number" class="form-control" id="min_order_value" name="min_order_value" 
+                   min="0" step="0.01"
+                   value="<?php echo $discount['min_order_value'] ?? 0; ?>">
+        </div>
+
+        <div class="col-md-6">
+            <label for="usage_limit" class="form-label">Giới Hạn Lượt Sử Dụng</label>
+            <input type="number" class="form-control" id="usage_limit" name="usage_limit" 
+                   min="1" value="<?php echo $discount['usage_limit'] ?? ''; ?>">
+        </div>
+
+        <div class="col-12">
+            <label for="description" class="form-label">Mô Tả</label>
+            <textarea class="form-control" id="description" name="description" rows="3"><?php echo htmlspecialchars($discount['description'] ?? ''); ?></textarea>
+        </div>
+
+        <div class="col-md-6">
+            <label for="start_date" class="form-label">Ngày Bắt Đầu <span class="text-danger">*</span></label>
+            <input type="datetime-local" class="form-control" id="start_date" name="start_date" required
+                   value="<?php echo date('Y-m-d\TH:i', strtotime($discount['start_date'] ?? '')); ?>">
+        </div>
+
+        <div class="col-md-6">
+            <label for="end_date" class="form-label">Ngày Kết Thúc <span class="text-danger">*</span></label>
+            <input type="datetime-local" class="form-control" id="end_date" name="end_date" required
+                   value="<?php echo date('Y-m-d\TH:i', strtotime($discount['end_date'] ?? '')); ?>">
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="status" name="status" 
+                       <?php echo ($discount['status'] ?? 0) ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="status">
+                    Kích hoạt mã giảm giá
+                </label>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle"></i> Cập Nhật
+            </button>
+            <a href="<?php echo APP_URL; ?>/DiscountCodeController/index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay Lại
+            </a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Chatbot API</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 20px;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+      .test-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #667eea;
+      }
+      .test-section h2 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+      }
+      .test-section p {
+        color: #666;
+        margin-bottom: 10px;
+        line-height: 1.6;
+      }
+      .input-group {
+        margin: 15px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #333;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 1em;
+      }
+      textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+      button {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+      }
+      button:hover {
+        background: #5568d3;
+        transform: translateY(-2px);
+      }
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 6px;
+        border-left: 4px solid #28a745;
+      }
+      .result.error {
+        border-left-color: #dc3545;
+      }
+      .result.warning {
+        border-left-color: #ffc107;
+      }
+      .result pre {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+      .status {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+      .status.success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status.error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🧪 Test Chatbot API</h1>
+
+      <!-- Test 1: Send Message -->
+      <div class="test-section">
+        <h2>Test 1: Gửi Tin Nhắn (Send Message)</h2>
+        <p>Kiểm tra xem API có nhận được tin nhắn không</p>
+
+        <div class="input-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="user@example.com"
+            value="test@example.com"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Tên:</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Tên khách hàng"
+            value="Khách hàng Test"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Tin nhắn:</label>
+          <textarea id="message" placeholder="Nội dung tin nhắn">
+Xin chào! Đây là tin nhắn test.</textarea
+          >
+        </div>
+
+        <button onclick="testSendMessage()">📤 Gửi Tin Nhắn Test</button>
+        <div id="result1" class="result" style="display: none"></div>
+      </div>
+
+      <!-- Test 2: Get Messages -->
+      <div class="test-section">
+        <h2>Test 2: Lấy Tin Nhắn (Get Messages)</h2>
+        <p>Kiểm tra xem API có trả về tin nhắn không</p>
+
+        <div class="input-group">
+          <label>Email (để lấy tin):</label>
+          <input
+            type="email"
+            id="emailGet"
+            placeholder="user@example.com"
+            value="test@example.com"
+          />
+        </div>
+
+        <button onclick="testGetMessages()">📥 Lấy Tin Nhắn Test</button>
+        <div id="result2" class="result" style="display: none"></div>
+      </div>
+
+      <!-- Test 3: Check Endpoint -->
+      <div class="test-section">
+        <h2>Test 3: Kiểm Tra Endpoint URL</h2>
+        <p>Xem URL API endpoint hiện tại</p>
+
+        <button onclick="testCheckEndpoint()">🔍 Kiểm Tra URL</button>
+        <div id="result3" class="result" style="display: none"></div>
+      </div>
+
+      <!-- Test 4: Database -->
+      <div class="test-section">
+        <h2>Test 4: Kiểm Tra Database</h2>
+        <p>Kiểm tra xem bảng chatbox_messages có tồn tại không</p>
+
+        <button onclick="testDatabase()">💾 Kiểm Tra Database</button>
+        <div id="result4" class="result" style="display: none"></div>
+      </div>
+
+      <!-- Test 5: Console Logs -->
+      <div class="test-section">
+        <h2>Test 5: Xem Console Logs</h2>
+        <p>Mở DevTools (F12) → Tab Console để xem chi tiết lỗi</p>
+        <button onclick="testConsole()">📋 In Log Test</button>
+        <div id="result5" class="result" style="display: none"></div>
+      </div>
+    </div>
+
+    <script>
+      const baseUrl = window.location.origin + "/xamcc/htdocs/phpnangcao/MVC";
+
+      async function testSendMessage() {
+        const email = document.getElementById("email").value;
+        const name = document.getElementById("name").value;
+        const message = document.getElementById("message").value;
+        const resultDiv = document.getElementById("result1");
+
+        if (!email || !name || !message) {
+          showResult(resultDiv, "error", "❌ Vui lòng điền đầy đủ thông tin");
+          return;
+        }
+
+        const apiUrl = baseUrl + "/index.php?url=Chatbox/send";
+
+        try {
+          console.log("🚀 Gửi request đến:", apiUrl);
+          console.log("📦 Data:", { email, name, message });
+
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, name, message }),
+          });
+
+          console.log("📡 Response status:", response.status);
+
+          const data = await response.json();
+          console.log("✅ Response data:", data);
+
+          if (data.success) {
+            showResult(
+              resultDiv,
+              "success",
+              `✅ Thành công!\n\n${data.message}\n\nTin nhắn đã được lưu vào database.`
+            );
+          } else {
+            showResult(resultDiv, "error", `❌ Lỗi: ${data.message}`);
+          }
+        } catch (error) {
+          console.error("💥 Error:", error);
+          showResult(
+            resultDiv,
+            "error",
+            `❌ Lỗi: ${error.message}\n\nKhả năng:\n- Server không chạy\n- Đường dẫn sai\n- CORS bị chặn`
+          );
+        }
+      }
+
+      async function testGetMessages() {
+        const email = document.getElementById("emailGet").value;
+        const resultDiv = document.getElementById("result2");
+
+        if (!email) {
+          showResult(resultDiv, "warning", "⚠️ Vui lòng nhập email");
+          return;
+        }
+
+        const apiUrl =
+          baseUrl +
+          "/index.php?url=Chatbox/getMessages&email=" +
+          encodeURIComponent(email);
+
+        try {
+          console.log("🚀 Lấy tin từ:", apiUrl);
+          const response = await fetch(apiUrl);
+
+          console.log("📡 Response status:", response.status);
+
+          const data = await response.json();
+          console.log("✅ Response data:", data);
+
+          if (data.success) {
+            const count = data.messages ? data.messages.length : 0;
+            showResult(
+              resultDiv,
+              "success",
+              `✅ Thành công!\n\nTìm thấy ${count} tin nhắn:\n\n${JSON.stringify(
+                data.messages,
+                null,
+                2
+              )}`
+            );
+          } else {
+            showResult(resultDiv, "error", `❌ Lỗi: ${data.message}`);
+          }
+        } catch (error) {
+          console.error("💥 Error:", error);
+          showResult(resultDiv, "error", `❌ Lỗi: ${error.message}`);
+        }
+      }
+
+      function testCheckEndpoint() {
+        const resultDiv = document.getElementById("result3");
+        const apiEndpoint = baseUrl + "/index.php?url=Chatbox/send";
+        const getMessagesEndpoint =
+          baseUrl + "/index.php?url=Chatbox/getMessages";
+
+        const info = `
+API Endpoint (POST): ${apiEndpoint}
+Get Messages Endpoint (GET): ${getMessagesEndpoint}
+
+Current Location: ${window.location.href}
+Base URL: ${baseUrl}
+
+Note: URL format phải là: /index.php?url=Controller/action
+Không phải: /index.php?controller=...&action=...
+            `;
+
+        showResult(resultDiv, "success", "✅ Endpoint URLs:\n\n" + info);
+      }
+
+      async function testDatabase() {
+        const resultDiv = document.getElementById("result4");
+
+        try {
+          const response = await fetch(baseUrl + "/check_chatbox.php");
+          const text = await response.text();
+          showResult(resultDiv, "success", "✅ Database check:\n\n" + text);
+        } catch (error) {
+          showResult(resultDiv, "error", "❌ Lỗi: " + error.message);
+        }
+      }
+
+      function testConsole() {
+        const resultDiv = document.getElementById("result5");
+        console.log("🧪 Test Console Log");
+        console.log("Base URL:", baseUrl);
+        console.log("Current Location:", window.location.href);
+        console.log("Chatbot Widget Config:", {
+          apiEndpoint: baseUrl + "/index.php?controller=Chatbox&action=send",
+          getMessagesEndpoint:
+            baseUrl + "/index.php?controller=Chatbox&action=getMessages",
+        });
+
+        showResult(
+          resultDiv,
+          "success",
+          "✅ Logs printed to console.\n\nMở DevTools (F12) để xem chi tiết."
+        );
+      }
+
+      function showResult(element, type, message) {
+        element.innerHTML = `
+                <div class="status ${type}">
+                    ${
+                      message.includes("✅")
+                        ? "✅ Thành công"
+                        : message.includes("❌")
+                        ? "❌ Lỗi"
+                        : "⚠️ Cảnh báo"
+                    }
+                </div>
+                <pre>${message}</pre>
+            `;
+        element.style.display = "block";
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

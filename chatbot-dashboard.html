@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot Widget - Dashboard</title>
+
+    <link rel="stylesheet" href="./public/css/chatbot-widget.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 3em;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.2em;
+        color: #666;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-icon {
+        font-size: 3em;
+        margin-bottom: 15px;
+      }
+
+      .card h2 {
+        font-size: 1.5em;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        color: #666;
+        font-size: 0.95em;
+        line-height: 1.6;
+        flex-grow: 1;
+        margin-bottom: 15px;
+      }
+
+      .card-link {
+        display: inline-block;
+        color: #667eea;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px 0;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s;
+      }
+
+      .card-link:hover {
+        border-bottom-color: #667eea;
+      }
+
+      .status-section {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .status-section h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+      }
+
+      .status-list {
+        list-style: none;
+      }
+
+      .status-item {
+        padding: 12px 0;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .status-item:last-child {
+        border-bottom: none;
+      }
+
+      .status-icon {
+        font-size: 1.5em;
+        min-width: 30px;
+      }
+
+      .status-ok {
+        color: #28a745;
+      }
+
+      .status-warning {
+        color: #ffc107;
+      }
+
+      .status-error {
+        color: #dc3545;
+      }
+
+      .code-block {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 6px;
+        padding: 15px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+        overflow-x: auto;
+        margin: 10px 0;
+      }
+
+      .footer {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        color: #666;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        margin-left: 10px;
+      }
+
+      .quick-test {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .quick-test h2 {
+        color: white;
+        margin-bottom: 15px;
+      }
+
+      .quick-test p {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .btn-white {
+        background: white;
+        color: #667eea;
+      }
+
+      .btn-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🤖 Chatbot Widget</h1>
+        <p>Hệ thống hỗ trợ khách hàng tự động với icon tương tác</p>
+      </header>
+
+      <!-- Quick Test -->
+      <div class="quick-test">
+        <h2>🎯 Test Chatbot Ngay</h2>
+        <p>
+          Chatbot đã được cài đặt trên trang này. Hãy xem icon chat ở góc dưới
+          bên phải.
+        </p>
+        <button class="btn btn-white" onclick="window.chatbot.open()">
+          📖 Mở Chatbox
+        </button>
+      </div>
+
+      <!-- Status Check -->
+      <div class="status-section">
+        <h2>✅ Tình Trạng Hệ Thống</h2>
+        <ul class="status-list">
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Frontend JavaScript - <strong>Đã cài đặt</strong></span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Frontend CSS - <strong>Đã cài đặt</strong></span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span
+              >Backend API - <strong>ChatboxController sẵn sàng</strong></span
+            >
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-warning">!</span>
+            <span
+              >Database -
+              <strong>Cần chạy SQL script</strong>
+              (CREATE_CHATBOX_TABLE_UPDATED.sql)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="grid">
+        <!-- Demo Page -->
+        <a href="./chatbot-demo.html" class="card">
+          <div class="card-icon">🎨</div>
+          <h2>Demo</h2>
+          <p>
+            Trang demo giới thiệu chatbot widget với hướng dẫn cài đặt chi tiết.
+          </p>
+          <span class="card-link">Xem demo →</span>
+        </a>
+
+        <!-- Example Page -->
+        <a href="./chatbot-example.html" class="card">
+          <div class="card-icon">📚</div>
+          <h2>Ví Dụ & Hướng Dẫn</h2>
+          <p>
+            Trang ví dụ chi tiết với các cách sử dụng và tùy chỉnh khác nhau.
+          </p>
+          <span class="card-link">Xem ví dụ →</span>
+        </a>
+
+        <!-- Admin Panel -->
+        <a href="./admin-chatbox.html" class="card">
+          <div class="card-icon">📊</div>
+          <h2>Quản Lý Admin</h2>
+          <p>
+            Bảng điều khiển quản lý tin nhắn từ khách hàng (dành cho admin).
+          </p>
+          <span class="card-link">Quản lý →</span>
+        </a>
+
+        <!-- Setup Guide -->
+        <a href="./CHATBOT_SETUP_GUIDE.md" class="card">
+          <div class="card-icon">📖</div>
+          <h2>Setup Guide</h2>
+          <p>
+            Hướng dẫn chi tiết về cài đặt, cấu hình và sử dụng chatbot widget.
+          </p>
+          <span class="card-link">Đọc hướng dẫn →</span>
+        </a>
+
+        <!-- Quick Start -->
+        <a href="./CHATBOT_QUICK_START.md" class="card">
+          <div class="card-icon">⚡</div>
+          <h2>Quick Start</h2>
+          <p>Tóm tắt nhanh các bước để bắt đầu sử dụng chatbot widget.</p>
+          <span class="card-link">Bắt đầu nhanh →</span>
+        </a>
+
+        <!-- Files & Resources -->
+        <div class="card">
+          <div class="card-icon">📁</div>
+          <h2>Files & Resources</h2>
+          <p>Danh sách tất cả các file được tạo và cấu trúc project.</p>
+          <div style="flex-grow: 1">
+            <div class="code-block">
+              public/css/chatbot-widget.css public/js/chatbot-widget.js
+              controllers/ChatboxController.php models/ChatboxModel.php
+              views/Font_end/ChatboxView.php
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Implementation Guide -->
+      <div class="status-section">
+        <h2>🚀 Hướng Dẫn Triển Khai</h2>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">
+          Bước 1: Tạo Bảng Database
+        </h3>
+        <p>Chạy SQL script để tạo bảng lưu trữ tin nhắn:</p>
+        <div class="code-block">
+          CREATE TABLE IF NOT EXISTS chatbox_messages ( id INT PRIMARY KEY
+          AUTO_INCREMENT, user_email VARCHAR(255), user_name VARCHAR(255),
+          message LONGTEXT, response_text LONGTEXT, status VARCHAR(50),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, responded_at TIMESTAMP
+          NULL );
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">
+          Bước 2: Kiểm Tra Files
+        </h3>
+        <p>Đảm bảo các files sau đã được tạo:</p>
+        <ul class="status-list">
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>/MVC/public/css/chatbot-widget.css</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>/MVC/public/js/chatbot-widget.js</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>/MVC/controllers/ChatboxController.php (Updated)</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>/MVC/views/homePage.php (Updated)</span>
+          </li>
+        </ul>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">
+          Bước 3: Test Chatbot
+        </h3>
+        <p>Truy cập website của bạn để kiểm tra chatbot:</p>
+        <div class="code-block">
+          http://localhost/xamcc/htdocs/phpnangcao/MVC/
+        </div>
+        <p style="margin-top: 10px">
+          Chatbox sẽ tự động mở sau 3 giây. Bạn sẽ thấy icon chat ở góc dưới bên
+          phải màn hình.
+        </p>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">
+          Bước 4: Tùy Chỉnh (Tuỳ Chọn)
+        </h3>
+        <p>Thay đổi tiêu đề, subtitle, màu sắc trong:</p>
+        <div class="code-block">
+          /MVC/public/js/chatbot-widget.js /MVC/public/css/chatbot-widget.css
+        </div>
+      </div>
+
+      <!-- API Documentation -->
+      <div class="status-section">
+        <h2>🔌 API Endpoints</h2>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">1. Gửi Tin Nhắn</h3>
+        <p><strong>Method:</strong> POST</p>
+        <p><strong>Endpoint:</strong></p>
+        <div class="code-block">
+          /MVC/index.php?controller=Chatbox&action=send
+        </div>
+        <p><strong>Body (JSON):</strong></p>
+        <div class="code-block">
+          { "email": "user@example.com", "name": "Tên khách hàng", "message":
+          "Nội dung tin nhắn" }
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">2. Lấy Tin Nhắn</h3>
+        <p><strong>Method:</strong> GET</p>
+        <p><strong>Endpoint:</strong></p>
+        <div class="code-block">
+          /MVC/index.php?controller=Chatbox&action=getMessages?email=user@example.com
+        </div>
+      </div>
+
+      <!-- Support & Features -->
+      <div class="status-section">
+        <h2>✨ Tính Năng & Support</h2>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">Tính Năng Chính</h3>
+        <ul class="status-list">
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Tự động hiển thị sau 3 giây</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Icon tương tác trên màn hình</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Giao diện hiện đại với animation</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Không yêu cầu đăng nhập</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Fully responsive (desktop, tablet, mobile)</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Lưu thông tin khách hàng</span>
+          </li>
+          <li class="status-item">
+            <span class="status-icon status-ok">✓</span>
+            <span>Xác thực email tự động</span>
+          </li>
+        </ul>
+
+        <h3 style="color: #667eea; margin: 20px 0 15px 0">
+          Support & Documentation
+        </h3>
+        <ul class="status-list">
+          <li class="status-item">
+            <span class="status-icon">📖</span>
+            <span
+              ><strong>Setup Guide:</strong> Hướng dẫn chi tiết
+              (CHATBOT_SETUP_GUIDE.md)</span
+            >
+          </li>
+          <li class="status-item">
+            <span class="status-icon">⚡</span>
+            <span
+              ><strong>Quick Start:</strong> Tóm tắt nhanh
+              (CHATBOT_QUICK_START.md)</span
+            >
+          </li>
+          <li class="status-item">
+            <span class="status-icon">💬</span>
+            <span
+              ><strong>Examples:</strong> Ví dụ sử dụng
+              (chatbot-example.html)</span
+            >
+          </li>
+          <li class="status-item">
+            <span class="status-icon">📊</span>
+            <span
+              ><strong>Admin Panel:</strong> Quản lý tin nhắn
+              (admin-chatbox.html)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer">
+        <p>🤖 Chatbot Widget v1.0</p>
+        <p>Phát triển với ❤️ cho website của bạn</p>
+        <p style="margin-top: 20px; color: #999; font-size: 0.9em">
+          © 2025 - All Rights Reserved
+        </p>
+      </div>
+    </div>
+
+    <!-- Chatbot Widget JS & CSS -->
+    <script src="./public/js/chatbot-widget.js"></script>
+  </body>
+</html>

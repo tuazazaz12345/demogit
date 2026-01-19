@@ -1,0 +1,159 @@
+/* Sakura Theme Overrides */
+:root {
+  --sakura-primary: #ffb7c5;
+  --sakura-secondary: #ff8da1;
+  --sakura-accent: #e8b4bc;
+  --sakura-bg: #fff5f6;
+  --book-brown: #8b4513;
+  --vintage-paper: #fff9f0;
+}
+
+/* Sakura Background */
+body {
+  background-color: var(--sakura-bg) !important;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFB7C5" fill-opacity="0.05" d="M0 0h100v100H0z"/></svg>');
+}
+
+/* Sidebar Book Style */
+.admin-sidebar {
+  background: linear-gradient(135deg, var(--book-brown), #654321) !important;
+  border-right: 4px double var(--vintage-paper) !important;
+  box-shadow: 5px 0 15px rgba(139, 69, 19, 0.1) !important;
+}
+
+/* Navigation Links */
+.admin-nav .nav-link {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-left: 3px solid transparent !important;
+  margin: 5px 10px !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.admin-nav .nav-link:hover {
+  border-left-color: var(--sakura-accent) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(5px) !important;
+}
+
+/* Cards with Book Style */
+.admin-card {
+  background: var(--vintage-paper) !important;
+  border-left: 5px solid var(--book-brown) !important;
+  box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.1) !important;
+  position: relative !important;
+}
+
+.admin-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23000" fill-opacity="0.02" d="M0 0h100v100H0z"/></svg>');
+  pointer-events: none;
+}
+
+/* Tables with Vintage Look */
+.admin-table {
+  background: var(--vintage-paper) !important;
+  border: 1px solid var(--book-brown) !important;
+}
+
+.admin-table thead {
+  background: linear-gradient(
+    45deg,
+    var(--book-brown),
+    var(--sakura-primary)
+  ) !important;
+  border-bottom: 2px double var(--vintage-paper) !important;
+}
+
+.admin-table tbody tr {
+  border-bottom: 1px solid rgba(139, 69, 19, 0.1) !important;
+}
+
+/* Buttons with Sakura Style */
+.btn-custom {
+  background: linear-gradient(
+    45deg,
+    var(--sakura-primary),
+    var(--sakura-secondary)
+  ) !important;
+  border: none !important;
+  color: white !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.btn-custom::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.btn-custom:hover::before {
+  opacity: 1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vintage-paper) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    var(--sakura-primary),
+    var(--sakura-secondary)
+  ) !important;
+  border-radius: 4px !important;
+}
+
+/* Sakura Animation Container */
+#sakura-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.sakura-petal {
+  position: absolute;
+  color: var(--sakura-primary);
+  font-size: 20px;
+  user-select: none;
+  animation: float 6s linear infinite;
+}
+
+/* Stats Cards */
+.stat-card {
+  background: var(--vintage-paper) !important;
+  border-left: 5px solid var(--book-brown) !important;
+  box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.1) !important;
+}
+
+.stat-icon {
+  background: linear-gradient(
+    45deg,
+    var(--sakura-primary),
+    var(--sakura-secondary)
+  ) !important;
+}

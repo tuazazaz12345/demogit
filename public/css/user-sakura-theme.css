@@ -1,0 +1,279 @@
+/* Sakura Theme CSS */
+:root {
+    --sakura-pink: #ffd7e9;
+    --sakura-pink-dark: #ffb7d5;
+    --sakura-text: #4a4a4a;
+    --sakura-accent: #ff99c8;
+    --sakura-white: #fff9fb;
+    --sakura-shadow: rgba(255, 153, 200, 0.2);
+}
+
+body {
+    background-color: var(--sakura-white);
+    color: var(--sakura-text);
+    font-family: 'M PLUS Rounded 1c', 'Quicksand', sans-serif;
+}
+:root {
+  --sakura-pink: #ff9cbc;
+  --sakura-dark: #ff6b9c;
+  --sakura-light: #ffd6e6;
+  --book-brown: #8b4513;
+  --cream-paper: #fff0f5;
+  --soft-text: #4a4a4a;
+  --sakura-gradient: linear-gradient(
+    45deg,
+    var(--sakura-pink),
+    var(--sakura-dark)
+  );
+  --sakura-shadow: 0 4px 15px rgba(255, 107, 156, 0.2);
+}
+
+/* Main Background */
+body {
+  background-color: var(--cream-paper);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFB7C5" fill-opacity="0.1" d="M30 40c5 0 5-10 10-10s5 10 10 10 5-10 10-10 5 10 10 10"/></svg>');
+  background-size: 300px;
+  color: var(--soft-text);
+}
+
+/* Navigation Bar */
+.navbar {
+  background: linear-gradient(
+    to right,
+    var(--sakura-light),
+    var(--sakura-pink)
+  ) !important;
+  border-bottom: 2px solid var(--sakura-dark);
+  box-shadow: var(--sakura-shadow) !important;
+}
+
+.navbar-brand {
+  color: var(--book-brown) !important;
+  font-family: "Playfair Display", serif;
+  position: relative;
+}
+
+.nav-link::after {
+  background: var(--sakura-pink) !important;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(
+      rgba(255, 156, 188, 0.3),
+      rgba(255, 107, 156, 0.3)
+    ),
+    url("../images/books-bg.jpg") center/cover !important;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--sakura-pink);
+}
+
+.hero-title {
+  color: var(--book-brown) !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Cards */
+.product-card {
+  background: var(--cream-paper) !important;
+  border: 2px solid var(--sakura-light) !important;
+  box-shadow: var(--sakura-shadow) !important;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  border-color: var(--sakura-pink) !important;
+  transform: translateY(-5px);
+}
+
+.product-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23000" fill-opacity="0.02" d="M0 0h100v100H0z"/></svg>');
+  pointer-events: none;
+}
+
+.product-card .card-title {
+  color: var(--book-brown) !important;
+  border-bottom: 2px solid var(--sakura-pink);
+  padding-bottom: 0.5rem;
+}
+
+.product-card .price {
+  color: var(--sakura-dark) !important;
+}
+
+/* Buttons */
+.btn-custom {
+  background: linear-gradient(
+    45deg,
+    var(--sakura-pink),
+    var(--sakura-dark)
+  ) !important;
+  border: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-custom::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.btn-custom:hover::before {
+  opacity: 1;
+}
+
+.btn-outline-custom {
+  border: 2px solid var(--sakura-pink) !important;
+  color: var(--book-brown) !important;
+}
+
+.btn-outline-custom:hover {
+  background: var(--sakura-pink) !important;
+  color: white !important;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(
+    to right,
+    var(--cream-paper),
+    var(--sakura-light)
+  ) !important;
+  border-top: 2px solid var(--sakura-pink);
+}
+
+footer h5 {
+  color: var(--book-brown) !important;
+  border-bottom: 2px solid var(--sakura-pink);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.social-links a {
+  color: var(--book-brown) !important;
+}
+
+.social-links a:hover {
+  color: var(--sakura-dark) !important;
+}
+
+/* Sakura Animation */
+@keyframes sakuraFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.sakura-petal {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  animation: sakuraFall 10s linear infinite;
+}
+
+/* Book Details */
+.book-detail {
+  background: var(--cream-paper) !important;
+  border-left: 5px solid var(--book-brown) !important;
+}
+
+.book-info h1 {
+  color: var(--book-brown) !important;
+}
+
+.book-price {
+  color: var(--sakura-dark) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--sakura-pink), var(--sakura-dark));
+  border-radius: 5px;
+}
+
+/* Category Pills */
+.category-pill {
+  background: var(--cream-paper) !important;
+  border: 1px solid var(--sakura-pink) !important;
+  color: var(--book-brown) !important;
+}
+
+.category-pill:hover,
+.category-pill.active {
+  background: linear-gradient(
+    45deg,
+    var(--sakura-pink),
+    var(--sakura-dark)
+  ) !important;
+  color: white !important;
+}
+
+/* Back to Top Button */
+#backToTop {
+  background: linear-gradient(
+    45deg,
+    var(--sakura-pink),
+    var(--sakura-dark)
+  ) !important;
+  box-shadow: 0 2px 10px rgba(255, 183, 197, 0.3);
+}
+
+/* Book Paper Texture */
+.product-card,
+.book-detail,
+.hero-section {
+  position: relative;
+}
+
+.product-card::after,
+.book-detail::after,
+.hero-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23000" fill-opacity="0.02" d="M0 0h100v100H0z"/></svg>');
+  pointer-events: none;
+  z-index: 1;
+}

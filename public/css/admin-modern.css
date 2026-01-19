@@ -1,0 +1,459 @@
+:root {
+  --primary-color: #ffb7c5; /* Sakura Pink */
+  --secondary-color: #ff8da1; /* Cherry Blossom */
+  --accent-color: #e8b4bc; /* Soft Petal Pink */
+  --text-color: #4a4a4a; /* Dark Gray */
+  --light-bg: #fff5f6; /* Pale Sakura */
+  --sidebar-width: 280px;
+  --book-brown: #8b4513; /* Classic Book Brown */
+  --paper-color: #fff9f0; /* Vintage Paper */
+  --success-color: #7bae7f; /* Natural Green */
+  --warning-color: #ffb75e; /* Warm Yellow */
+  --danger-color: #ff8b8b; /* Soft Red */
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-color);
+}
+
+/* Admin Layout */
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: var(--sidebar-width);
+  background: linear-gradient(135deg, var(--book-brown), #654321);
+  padding: 0;
+  color: white;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border-right: 4px double var(--paper-color);
+  box-shadow: 5px 0 15px rgba(139, 69, 19, 0.1);
+}
+
+.sidebar-header {
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Admin Cards */
+.admin-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Stats Cards */
+.stat-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 0.75rem;
+}
+
+/* Admin Navigation */
+.admin-nav {
+  padding: 1rem 0;
+}
+
+.admin-nav .nav-item {
+  padding: 0.25rem 1rem;
+}
+
+.admin-nav .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.admin-nav .nav-link i {
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  width: 24px;
+}
+
+.admin-nav .nav-link span {
+  font-size: 0.95rem;
+}
+
+.admin-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(5px);
+}
+
+/* Admin Navbar */
+.admin-navbar {
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.sidebar-toggle {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+}
+
+.sidebar-toggle:hover {
+  background: var(--light-bg);
+}
+
+/* Search Form */
+.search-form .input-group {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-form .form-control {
+  border: 1px solid #e5e7eb;
+  border-right: none;
+  padding: 0.5rem 1rem;
+}
+
+.search-form .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+/* User Menu */
+.user-menu {
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.user-menu i {
+  font-size: 1.25rem;
+}
+
+.user-menu:hover {
+  background: var(--light-bg);
+}
+
+/* Content Area */
+.admin-content {
+  padding: 2rem;
+  flex: 1;
+}
+
+/* Cards & Tables */
+.admin-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.admin-table {
+  width: 100%;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.admin-table thead {
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+}
+
+.admin-table th {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  padding: 1rem;
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-table tbody tr:hover {
+  background: var(--light-bg);
+}
+
+/* Buttons */
+.btn-custom {
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Book and Sakura Theme */
+.admin-sidebar {
+  background: linear-gradient(135deg, var(--book-brown), #654321);
+  border-right: 4px double var(--paper-color);
+  box-shadow: 5px 0 15px rgba(139, 69, 19, 0.1);
+}
+
+.sidebar-header {
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFF" fill-opacity="0.05" d="M0 0h100v100H0z"/><path fill="%23FFF" fill-opacity="0.05" d="M13 25c20 0 20 50 40 50s20-50 40-50"/></svg>')
+    center/cover;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-nav .nav-link {
+  border-left: 3px solid transparent;
+  background: rgba(255, 255, 255, 0.03);
+  margin: 5px 10px;
+  border-radius: 0 8px 8px 0;
+}
+
+.admin-nav .nav-link:hover {
+  border-left-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Sakura Animation */
+@keyframes fallingSakura {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.sakura-petal {
+  position: fixed;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.sakura-petal::before {
+  content: "🌸";
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+/* Admin Cards with Book Theme */
+.admin-card {
+  background: var(--paper-color);
+  border-left: 5px solid var(--book-brown);
+  box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.1);
+}
+
+.admin-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23000" fill-opacity="0.02" d="M0 0h100v100H0z"/></svg>')
+    center/cover;
+  pointer-events: none;
+}
+
+/* Tables with Vintage Look */
+.admin-table {
+  background: var(--paper-color);
+  border: 1px solid var(--book-brown);
+}
+
+.admin-table thead {
+  background: linear-gradient(45deg, var(--book-brown), var(--primary-color));
+  border-bottom: 2px double var(--paper-color);
+}
+
+.admin-table tbody tr {
+  border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
+}
+
+/* Buttons with Sakura Style */
+.btn-custom {
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-custom::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 60%
+  );
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.btn-custom:hover::before {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .admin-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .admin-main {
+    margin-left: 0;
+  }
+}
+
+/* Basic Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease forwards;
+}
+
+/* Add falling sakura animation */
+@keyframes float {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}

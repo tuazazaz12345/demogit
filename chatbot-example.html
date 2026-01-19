@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot Widget - Ví Dụ Sử Dụng</title>
+
+    <link rel="stylesheet" href="./public/css/chatbot-widget.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f7fa;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.1em;
+        opacity: 0.9;
+      }
+
+      .content-section {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+      }
+
+      p {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 15px;
+      }
+
+      .example-box {
+        background: #f8f9fa;
+        border-left: 4px solid #667eea;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: #e8eef7;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .feature-list {
+        list-style: none;
+      }
+
+      .feature-list li {
+        padding: 10px 0;
+        color: #555;
+        border-bottom: 1px solid #eee;
+      }
+
+      .feature-list li:before {
+        content: "✓ ";
+        color: #28a745;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .feature-list li:last-child {
+        border-bottom: none;
+      }
+
+      .alert {
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+      }
+
+      .alert-info {
+        background: #e8f4f8;
+        border-left: 4px solid #0dcaf0;
+        color: #055160;
+      }
+
+      .alert-success {
+        background: #f0fff4;
+        border-left: 4px solid #28a745;
+        color: #0a3622;
+      }
+
+      code {
+        background: #f0f0f0;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        color: #999;
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🤖 Chatbot Widget</h1>
+        <p>Hỗ trợ khách hàng tức thì & tự động trên website</p>
+      </header>
+
+      <!-- Section 1: Tính Năng -->
+      <div class="content-section">
+        <h2>✨ Tính Năng Chính</h2>
+        <ul class="feature-list">
+          <li>Tự động hiển thị sau 3 giây khi khách hàng truy cập</li>
+          <li>Icon tương tác ở góc dưới bên phải màn hình</li>
+          <li>Giao diện hiện đại với gradient và animation</li>
+          <li>Không cần đăng nhập - Guest users có thể dùng</li>
+          <li>Responsive - Hoạt động tốt trên mọi thiết bị</li>
+          <li>Lưu thông tin khách hàng trong localStorage</li>
+          <li>Xác thực email tự động</li>
+          <li>Tích hợp với backend API dễ dàng</li>
+        </ul>
+      </div>
+
+      <!-- Section 2: Hướng Dẫn Nhanh -->
+      <div class="content-section">
+        <h2>🚀 Hướng Dẫn Nhanh</h2>
+
+        <p>Để thêm chatbox vào website của bạn, chỉ cần thêm 2 dòng code:</p>
+
+        <h3 style="color: #667eea; margin-top: 20px">
+          1️⃣ Thêm CSS vào &lt;head&gt;
+        </h3>
+        <div class="example-box">
+          &lt;link href="./public/css/chatbot-widget.css" rel="stylesheet"&gt;
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 0 0">
+          2️⃣ Thêm JavaScript trước &lt;/body&gt;
+        </h3>
+        <div class="example-box">
+          &lt;script src="./public/js/chatbot-widget.js"&gt;&lt;/script&gt;
+        </div>
+
+        <div class="alert alert-success">
+          <strong>✅ Xong!</strong> Chatbox sẽ tự động hoạt động trên website
+          của bạn.
+        </div>
+      </div>
+
+      <!-- Section 3: Tùy Chỉnh -->
+      <div class="content-section">
+        <h2>🎨 Tùy Chỉnh Widget</h2>
+
+        <p>Bạn có thể tùy chỉnh chatbot bằng cách chỉnh sửa file JavaScript:</p>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          Ví dụ 1: Thay đổi thông tin hiển thị
+        </h3>
+        <div class="example-box">
+          const chatbot = new ChatbotWidget({ title: 'Trợ Giúp Tức Thì',
+          subtitle: '24/7 - Luôn sẵn sàng', placeholderText: 'Nhập câu hỏi của
+          bạn...' });
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          Ví dụ 2: Tắt tự động mở
+        </h3>
+        <div class="example-box">
+          const chatbot = new ChatbotWidget({ autoOpen: false // Chỉ mở khi
+          click icon });
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          Ví dụ 3: Thay đổi độ trễ
+        </h3>
+        <div class="example-box">
+          const chatbot = new ChatbotWidget({ autoOpenDelay: 5000 // 5 giây thay
+          vì 3 giây });
+        </div>
+      </div>
+
+      <!-- Section 4: Control Programmatic -->
+      <div class="content-section">
+        <h2>🎮 Control Chatbox Từ Code</h2>
+
+        <p>Bạn có thể control chatbot từ JavaScript code:</p>
+
+        <div class="button-group">
+          <button class="btn-primary" onclick="openChatbot()">
+            📖 Mở Chatbox
+          </button>
+          <button class="btn-secondary" onclick="closeChatbot()">
+            🚪 Đóng Chatbox
+          </button>
+          <button class="btn-primary" onclick="sendTestMessage()">
+            💬 Gửi Tin Test
+          </button>
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          Các lệnh khả dụng:
+        </h3>
+        <div class="example-box">
+          // Mở chatbox window.chatbot.open(); // Đóng chatbox
+          window.chatbot.close(); // Gửi tin nhắn
+          window.chatbot.displayUserMessage('Xin chào!'); // Hiển thị phản hồi
+          window.chatbot.displayBotMessage('Chúng tôi sẵn sàng hỗ trợ bạn!');
+        </div>
+      </div>
+
+      <!-- Section 5: API Endpoints -->
+      <div class="content-section">
+        <h2>🔌 API Endpoints</h2>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">1️⃣ Gửi Tin Nhắn</h3>
+        <p><code>POST /MVC/index.php?controller=Chatbox&action=send</code></p>
+        <div class="example-box">
+          { "email": "user@example.com", "name": "Tên khách hàng", "message":
+          "Nội dung tin nhắn" }
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">2️⃣ Lấy Tin Nhắn</h3>
+        <p>
+          <code
+            >GET
+            /MVC/index.php?controller=Chatbox&action=getMessages?email=user@example.com</code
+          >
+        </p>
+        <div class="alert alert-info">
+          <strong>ℹ️ Lưu ý:</strong> User phải được đăng nhập hoặc cung cấp
+          email trong URL query parameter.
+        </div>
+      </div>
+
+      <!-- Section 6: Database -->
+      <div class="content-section">
+        <h2>💾 Cơ Sở Dữ Liệu</h2>
+
+        <p>
+          Chatbot sử dụng bảng <code>chatbox_messages</code> để lưu trữ tin
+          nhắn:
+        </p>
+
+        <div class="example-box">
+          CREATE TABLE chatbox_messages ( id INT PRIMARY KEY AUTO_INCREMENT,
+          user_email VARCHAR(255), user_name VARCHAR(255), message LONGTEXT,
+          response_text LONGTEXT, status VARCHAR(50), created_at TIMESTAMP,
+          responded_at TIMESTAMP );
+        </div>
+
+        <div class="alert alert-info">
+          <strong>✓ Đã được tạo sẵn:</strong> Hãy chạy file SQL
+          <code>CREATE_CHATBOX_TABLE_UPDATED.sql</code> để tạo bảng.
+        </div>
+      </div>
+
+      <!-- Section 7: CSS Customization -->
+      <div class="content-section">
+        <h2>🎨 Tùy Chỉnh CSS</h2>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">Thay đổi màu sắc</h3>
+        <p>
+          Sửa file <code>chatbot-widget.css</code> và tìm các gradient colors:
+        </p>
+
+        <div class="example-box">
+          /* Màu xanh lá */ background: linear-gradient(135deg, #20c997 0%,
+          #0dcaf0 100%); /* Màu đỏ */ background: linear-gradient(135deg,
+          #dc3545 0%, #ff6b6b 100%); /* Màu vàng */ background:
+          linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+        </div>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">Thay đổi vị trí</h3>
+        <div class="example-box">
+          .chatbot-icon-container { bottom: 30px; /* Từ dưới */ right: 30px; /*
+          Từ phải */ } /* Hoặc đặt bên trái */ .chatbot-icon-container { bottom:
+          30px; left: 30px; }
+        </div>
+      </div>
+
+      <!-- Section 8: Troubleshooting -->
+      <div class="content-section">
+        <h2>🔧 Khắc Phục Sự Cố</h2>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          ❌ Chatbox không hiển thị
+        </h3>
+        <p>Kiểm tra:</p>
+        <ul style="margin-left: 20px; margin-bottom: 15px">
+          <li>✓ CSS file được load (Mở DevTools F12 → Network)</li>
+          <li>✓ JS file được load (Mở DevTools F12 → Network)</li>
+          <li>✓ Kiểm tra console có error không</li>
+          <li>✓ Kiểm tra paths trong HTML file</li>
+        </ul>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          ❌ Tin nhắn không gửi được
+        </h3>
+        <p>Kiểm tra:</p>
+        <ul style="margin-left: 20px; margin-bottom: 15px">
+          <li>✓ API endpoint đúng</li>
+          <li>✓ Email hợp lệ (có @ và dấu .)</li>
+          <li>✓ Message không trống</li>
+          <li>✓ Bảng database tồn tại</li>
+        </ul>
+
+        <h3 style="color: #667eea; margin: 20px 0 10px 0">
+          ❌ Không load được tin nhắn cũ
+        </h3>
+        <p>Kiểm tra:</p>
+        <ul style="margin-left: 20px">
+          <li>✓ User đã đăng nhập hoặc cung cấp email</li>
+          <li>✓ Dữ liệu tồn tại trong database</li>
+          <li>✓ Email trùng khớp</li>
+        </ul>
+      </div>
+
+      <!-- Section 9: Demo -->
+      <div
+        class="content-section"
+        style="
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+        "
+      >
+        <h2 style="color: white; border-color: rgba(255, 255, 255, 0.3)">
+          🎯 Thử Ngay
+        </h2>
+        <p style="color: white; margin-bottom: 20px">
+          Chatbot widget đã được cài đặt trên trang này! Hãy xem icon chat ở góc
+          dưới bên phải màn hình.
+        </p>
+        <div class="button-group">
+          <button
+            class="btn-secondary"
+            onclick="window.chatbot.open()"
+            style="background: white; color: #667eea"
+          >
+            📖 Mở Chatbox Ngay
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>💡 Chatbot Widget v1.0</p>
+        <p>Được phát triển với ❤️ cho trang web của bạn</p>
+      </div>
+    </div>
+
+    <!-- Chatbot Widget CSS -->
+    <link rel="stylesheet" href="./public/css/chatbot-widget.css" />
+
+    <!-- Chatbot Widget JS -->
+    <script src="./public/js/chatbot-widget.js"></script>
+
+    <script>
+      // Functions để control chatbot
+      function openChatbot() {
+        if (window.chatbot) {
+          window.chatbot.open();
+        }
+      }
+
+      function closeChatbot() {
+        if (window.chatbot) {
+          window.chatbot.close();
+        }
+      }
+
+      function sendTestMessage() {
+        if (window.chatbot) {
+          window.chatbot.displayUserMessage(
+            "Xin chào! Đây là tin nhắn test 👋"
+          );
+          setTimeout(() => {
+            window.chatbot.displayBotMessage(
+              "Xin chào! Chúng tôi rất vui lòng giúp bạn. 😊"
+            );
+          }, 1000);
+        }
+      }
+
+      // Auto-open chatbot khi load trang
+      window.addEventListener("load", () => {
+        console.log("✓ Chatbot widget đã được tải thành công!");
+      });
+    </script>
+  </body>
+</html>
