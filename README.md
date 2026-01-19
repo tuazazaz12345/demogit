@@ -16,7 +16,7 @@ Nhập tệp tin database/website (6)
 Cấu hình: 
 
 
-Cơ sở dữ liệu & URL: Chỉnh sửa trong app/config/config.php. Lưu ý cập nhật BASE_URLliên kết ngrok của bạn.
+Cơ sở dữ liệu & URL: Chỉnh sửa trong app/config.php. Lưu ý cập nhật BASE_URL liên kết ngrok của bạn.
 
 
 Máy chủ thư: Chỉnh sửa app/config/mail_config.phpđể gửi mã OTP/thông báo.
